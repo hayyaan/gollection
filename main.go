@@ -9,7 +9,7 @@ import (
 
 type Gollection struct {
 	Cli    *cli.App
-	Env    GollectionEnv
+	Env    Env
 	Router *gin.Engine
 }
 
