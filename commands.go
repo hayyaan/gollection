@@ -6,6 +6,7 @@ import (
 	"github.com/codegangsta/cli"
 )
 
+// AddCommands takes commands and adds them aswell as gollection's commands to the application.
 func (gollection *Gollection) AddCommands(commands ...cli.Command) {
 	for _, command := range commands {
 		gollection.Cli.Commands = append(gollection.Cli.Commands, command)
