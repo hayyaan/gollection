@@ -14,8 +14,8 @@ type Gollection struct {
 	Router *gin.Engine
 }
 
-// NewGollection creates a new gollection with minimum requirements
-func NewGollection() *Gollection {
+// New creates a new gollection with minimum requirements
+func New() *Gollection {
 	gollection := Gollection{
 		Cli: cli.NewApp(),
 	}
