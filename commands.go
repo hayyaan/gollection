@@ -6,7 +6,11 @@ import (
 	"github.com/codegangsta/cli"
 )
 
-func (gollection *Gollection) AddCommands() {
+func (gollection *Gollection) AddCommands(commands ...cli.Command) {
+	for _, command := range commands {
+		gollection.Cli.Commands = append(gollection.Cli.Commands, command)
+	}
+
 	gollection.addServeCommand()
 }
 
