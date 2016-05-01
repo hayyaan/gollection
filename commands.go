@@ -7,7 +7,11 @@ import (
 )
 
 func (gollection *Gollection) AddCommands() {
-	host, port := gollection.Config.GetHostPort()
+	gollection.addServeCommand()
+}
+
+func (gollection *Gollection) addServeCommand() {
+	host, port := gollection.Env.GetHostPort()
 	addr := fmt.Sprintf("%s:%d", host, port)
 	gollection.Cli.Commands = append(gollection.Cli.Commands, cli.Command{
 		Name:  "serve",

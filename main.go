@@ -9,7 +9,7 @@ import (
 
 type Gollection struct {
 	Cli    *cli.App
-	Config GollectionConfig
+	Env    GollectionEnv
 	Router *gin.Engine
 }
 
@@ -25,6 +25,6 @@ func (gollection *Gollection) Run() error {
 	return gollection.Cli.Run(os.Args)
 }
 
-func (gollection *Gollection) SetConfig(gc GollectionConfig) {
-	gollection.Config = gc
+func (gollection *Gollection) SetEnv(env GollectionEnv) {
+	gollection.Env = env
 }
