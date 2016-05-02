@@ -24,6 +24,8 @@ func New(config Config) *Gollection {
 		Router: gin.Default(),
 	}
 
+	gollection.startCli()
+
 	return &gollection
 }
 

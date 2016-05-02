@@ -6,18 +6,23 @@ import (
 	"github.com/codegangsta/cli"
 )
 
-// AddCommands takes commands and adds them aswell as gollection's commands to the application.
-func (gollection *Gollection) AddCommands(commands ...cli.Command) {
-	for _, command := range commands {
-		gollection.Cli.Commands = append(gollection.Cli.Commands, command)
-	}
+func (gollection *Gollection) startCli() {
+	gollection.Cli.Name = gollection.Config.AppConfig.Name
+	gollection.Cli.Usage = gollection.Config.AppConfig.Usage
+	gollection.Cli.EnableBashCompletion = true
 
 	gollection.addServeCommand()
 }
 
+// AddCommands takes commands and adds them additionally to gollection's commands.
+func (gollection *Gollection) AddCommands(commands ...cli.Command) {
+	for _, command := range commands {
+		gollection.Cli.Commands = append(gollection.Cli.Commands, command)
+	}
+}
+
 func (gollection *Gollection) addServeCommand() {
-	host, port := gollection.Env.GetHostPort()
-	addr := fmt.Sprintf("%s:%d", host, port)
+	addr := fmt.Sprintf("%s:%d", gollection.Config.Host, gollection.Config.Port)
 	gollection.Cli.Commands = append(gollection.Cli.Commands, cli.Command{
 		Name:  "serve",
 		Usage: "Run the http server that listens on " + addr,
