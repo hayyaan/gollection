@@ -10,16 +10,18 @@ import (
 // Gollection holds everything for your application to work
 type Gollection struct {
 	Cli    *cli.App
+	Config Config
 	Router *gin.Engine
 }
 
 // New creates a new gollection with minimum requirements
-func New() *Gollection {
+func New(config Config) *Gollection {
 	gin.SetMode(gin.ReleaseMode)
 
 	gollection := Gollection{
 		Cli:    cli.NewApp(),
-		Router: gin.New(),
+		Config: config,
+		Router: gin.Default(),
 	}
 
 	return &gollection
