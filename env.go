@@ -1,10 +1,29 @@
 package gollection
 
-// Env makes sure that all env variables are available to the application.
-type Env interface {
-	// GetEnv returns production, local...
-	GetEnv() string
+import (
+	"os"
+	"strconv"
+)
 
-	// GetHostPort returns the http host & port
-	GetHostPort() (string, int)
+func GetEnv(key string, fallback string) string {
+	value := os.Getenv(key)
+	if value != "" {
+		return value
+	}
+
+	return fallback
+}
+
+func GetEnvInt(key string, fallback int) int {
+	stringValue := GetEnv(key, "")
+	if stringValue != "" {
+		value, err := strconv.Atoi(stringValue)
+		if err != nil {
+			return fallback
+		}
+
+		return value
+	}
+
+	return fallback
 }

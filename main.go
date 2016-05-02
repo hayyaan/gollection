@@ -10,7 +10,6 @@ import (
 // Gollection holds everything for your application to work
 type Gollection struct {
 	Cli    *cli.App
-	Env    Env
 	Router *gin.Engine
 }
 
@@ -29,11 +28,6 @@ func New() *Gollection {
 // Run runs your gollection application. Fingers crossed
 func (gollection *Gollection) Run() error {
 	return gollection.Cli.Run(os.Args)
-}
-
-// SetEnv gets your applications Env and passes them to gollection
-func (gollection *Gollection) SetEnv(env Env) {
-	gollection.Env = env
 }
 
 func (gollection *Gollection) AddRoutes(routes func(*gin.Engine)) {
