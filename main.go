@@ -16,12 +16,12 @@ type Gollection struct {
 
 // New creates a new gollection with minimum requirements
 func New() *Gollection {
+	gin.SetMode(gin.ReleaseMode)
+
 	gollection := Gollection{
 		Cli:    cli.NewApp(),
-		Router: gin.Default(),
+		Router: gin.New(),
 	}
-
-	gin.SetMode(gin.ReleaseMode)
 
 	return &gollection
 }
