@@ -17,8 +17,11 @@ type Gollection struct {
 // New creates a new gollection with minimum requirements
 func New() *Gollection {
 	gollection := Gollection{
-		Cli: cli.NewApp(),
+		Cli:    cli.NewApp(),
+		Router: gin.Default(),
 	}
+
+	gin.SetMode(gin.ReleaseMode)
 
 	return &gollection
 }
@@ -31,4 +34,8 @@ func (gollection *Gollection) Run() error {
 // SetEnv gets your applications Env and passes them to gollection
 func (gollection *Gollection) SetEnv(env Env) {
 	gollection.Env = env
+}
+
+func (gollection *Gollection) AddRoutes(routes func(*gin.Engine)) {
+	routes(gollection.Router)
 }
