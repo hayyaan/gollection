@@ -14,25 +14,24 @@ Simply fork the code and send a pull request.
 ### Roadmap
 
 #### Basic features
-* [ ] Configuration / ENV
-* [ ] CLI
-* [ ] Additional features
+* [X] Configuration / ENV
+* [X] CLI
+
+#### Additional features
 * [ ] Cache
-* [ ] Redis
+    * [ ] Redis
 * [ ] Hashing
 * [ ] Mail
 * [ ] Testing
 * [ ] Validation
 * [ ] Encryption
 
-#### Events
+* [ ] Events
 * [ ] Filesystem / Cloud Storage
-* [ ] Localization
 * [ ] Queues
-* [ ] Task Scheduling
 
-#### HTTP features (0.1)
-* [ ] Routing
+#### HTTP features
+* [X] Routing
 * [ ] Middleware
 * [ ] Controllers
 * [ ] Requests
@@ -41,5 +40,9 @@ Simply fork the code and send a pull request.
 * [ ] Error Pages (404, 500)
 
 #### Additional HTTP Features
-* [ ] Authentication (0.2)
-* [ ] Authorization (0.2)
+* [ ] Authentication
+* [ ] Authorization
+
+#### Maybe one day
+* [ ] Localization
+* [ ] Task Scheduling
