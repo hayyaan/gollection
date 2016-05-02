@@ -1,7 +1,8 @@
 package gollection
 
 import (
-	"github.com/sosedoff/pgweb/Godeps/_workspace/src/github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"
+
 	"os"
 	"testing"
 )
