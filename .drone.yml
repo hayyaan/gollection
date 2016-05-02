@@ -1,0 +1,6 @@
+build:
+  image: golang:1-alpine
+  environment:
+    - CGO_ENABLED=0
+  commands:
+    - make
