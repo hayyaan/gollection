@@ -10,3 +10,36 @@ It was born out of the frustration to always write the same boilerplate code.
 
 ### Contributing
 Simply fork the code and send a pull request.
+
+### Roadmap
+
+#### Basic features
+* [ ] Configuration / ENV
+* [ ] CLI
+* [ ] Additional features
+* [ ] Cache
+* [ ] Redis
+* [ ] Hashing
+* [ ] Mail
+* [ ] Testing
+* [ ] Validation
+* [ ] Encryption
+
+#### Events
+* [ ] Filesystem / Cloud Storage
+* [ ] Localization
+* [ ] Queues
+* [ ] Task Scheduling
+
+#### HTTP features (0.1)
+* [ ] Routing
+* [ ] Middleware
+* [ ] Controllers
+* [ ] Requests
+* [ ] Responses
+* [ ] Templates
+* [ ] Error Pages (404, 500)
+
+#### Additional HTTP Features
+* [ ] Authentication (0.2)
+* [ ] Authorization (0.2)
