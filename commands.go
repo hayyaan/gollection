@@ -22,7 +22,7 @@ func (gollection *Gollection) AddCommands(commands ...cli.Command) {
 }
 
 func (gollection *Gollection) addServeCommand() {
-	addr := fmt.Sprintf("%s:%d", gollection.Config.Host, gollection.Config.Port)
+	addr := fmt.Sprintf("%s:%d", gollection.Config.AppConfig.Host, gollection.Config.AppConfig.Port)
 	gollection.Cli.Commands = append(gollection.Cli.Commands, cli.Command{
 		Name:  "serve",
 		Usage: "Run the http server that listens on " + addr,
