@@ -14,18 +14,19 @@ Simply fork the code and send a pull request.
 ### Roadmap
 
 #### Basic features
+* [ ] Installer
 * [X] Configuration / ENV
 * [X] CLI
 
 #### Additional features
 * [ ] Cache
+    * [ ] In-Memory
     * [ ] Redis
 * [ ] Hashing
 * [ ] Mail
 * [ ] Testing
 * [ ] Validation
 * [ ] Encryption
-
 * [ ] Events
 * [ ] Filesystem / Cloud Storage
 * [ ] Queues
@@ -37,7 +38,7 @@ Simply fork the code and send a pull request.
 * [ ] Requests
 * [ ] Responses
 * [ ] Templates
-* [ ] Error Pages (404, 500)
+    * [ ] Error Pages (404, 500)
 
 #### Additional HTTP Features
 * [ ] Authentication
