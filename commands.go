@@ -2,16 +2,19 @@ package gollection
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/codegangsta/cli"
+	"github.com/rubenv/sql-migrate"
 )
 
-func (gollection *Gollection) startCli() {
-	gollection.Cli.Name = gollection.Config.AppConfig.Name
-	gollection.Cli.Usage = gollection.Config.AppConfig.Usage
-	gollection.Cli.EnableBashCompletion = true
+func (g *Gollection) startCli() {
+	g.Cli.Name = g.Config.AppConfig.Name
+	g.Cli.Usage = g.Config.AppConfig.Usage
+	g.Cli.EnableBashCompletion = true
 
-	gollection.addServeCommand()
+	g.addServeCommand()
+	g.addDBCommand()
 }
 
 // AddCommands takes commands and adds them additionally to gollection's commands.
@@ -29,5 +32,35 @@ func (gollection *Gollection) addServeCommand() {
 		Action: func(c *cli.Context) {
 			gollection.Router.Run(addr) // TODO: Return the error
 		},
+	})
+}
+
+func (g *Gollection) addDBCommand() {
+	migrations := &migrate.FileMigrationSource{Dir: "database/migrations"}
+
+	g.Cli.Commands = append(g.Cli.Commands, cli.Command{
+		Name:  "migrate",
+		Usage: "Run migration actions",
+		Subcommands: []cli.Command{{
+			Name:  "up",
+			Usage: "Migrate your database",
+			Action: func(c *cli.Context) {
+				applied, err := migrate.Exec(g.DB.DB(), g.Config.DBConfig.Dialect, migrations, migrate.Up)
+				if err != nil {
+					log.Fatal(err)
+				}
+				log.Printf("Applied to %d migrations!\n", applied)
+			},
+		}, {
+			Name:  "down",
+			Usage: "Rollback all database migrations",
+			Action: func(c *cli.Context) {
+				applied, err := migrate.Exec(g.DB.DB(), g.Config.DBConfig.Dialect, migrations, migrate.Down)
+				if err != nil {
+					log.Fatal(err)
+				}
+				log.Printf("Rolled back %d migrations!\n", applied)
+			},
+		}},
 	})
 }
