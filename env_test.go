@@ -1,11 +1,28 @@
 package gollection
 
 import (
-	"github.com/stretchr/testify/assert"
-
 	"os"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
+
+func TestParseEnvFile(t *testing.T) {
+	assert.Equal(t,
+		map[string]string{},
+		parseEnvFile("\n\n"),
+	)
+
+	assert.Equal(t,
+		map[string]string{"APP_HOST": "0.0.0.0", "APP_PORT": "1234"},
+		parseEnvFile("APP_HOST=0.0.0.0\nAPP_PORT=1234\n\n"),
+	)
+
+	assert.Equal(t,
+		map[string]string{},
+		parseEnvFile("foo\none=two=tree\n\n"),
+	)
+}
 
 func TestGetEnv(t *testing.T) {
 	os.Clearenv()
