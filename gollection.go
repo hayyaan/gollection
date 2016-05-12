@@ -46,7 +46,7 @@ func (g *Gollection) AddDB(db *gorm.DB, err error) {
 		log.Fatal(err)
 	}
 
-	if g.Config.AppConfig.Env == "local" {
+	if g.Config.AppConfig.Debug {
 		db.LogMode(true)
 	}
 

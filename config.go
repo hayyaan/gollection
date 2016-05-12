@@ -10,7 +10,7 @@ type (
 		Usage string
 		Host  string
 		Port  int
-		Env   string
+		Debug bool
 	}
 	DBConfig struct {
 		Dialect  string
