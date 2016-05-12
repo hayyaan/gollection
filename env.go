@@ -48,9 +48,9 @@ func parseEnvFile(e string) map[string]string {
 
 // GetEnv gets a ENV value as string or returns the fallback
 func GetEnv(key string, fallback string) string {
-	value := os.Getenv(key)
-	if value != "" {
-		return value
+	s := os.Getenv(key)
+	if s != "" {
+		return s
 	}
 
 	return fallback
@@ -58,14 +58,31 @@ func GetEnv(key string, fallback string) string {
 
 // GetEnvInt gets a ENV value as int or returns the fallback
 func GetEnvInt(key string, fallback int) int {
-	stringValue := GetEnv(key, "")
-	if stringValue != "" {
-		value, err := strconv.Atoi(stringValue)
+	s := GetEnv(key, "")
+	if s != "" {
+		i, err := strconv.Atoi(s)
 		if err != nil {
+			log.Printf("Couldn't parse env %s, falling back to %d", key, fallback)
 			return fallback
 		}
 
-		return value
+		return i
+	}
+
+	return fallback
+}
+
+// GetEnvBool gets a ENV value as bool or returns the fallback
+func GetEnvBool(key string, fallback bool) bool {
+	s := GetEnv(key, "")
+	if s != "" {
+		b, err := strconv.ParseBool(s)
+		if err != nil {
+			log.Printf("Couldn't parse env %s, falling back to %b", key, fallback)
+			return fallback
+		}
+
+		return b
 	}
 
 	return fallback

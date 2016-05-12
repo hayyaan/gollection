@@ -39,3 +39,15 @@ func TestGetEnvInt(t *testing.T) {
 	os.Setenv("foo", "1234")
 	assert.Equal(t, 1234, GetEnvInt("foo", 42))
 }
+
+func TestGetEnvBool(t *testing.T) {
+	os.Clearenv()
+	assert.True(t, GetEnvBool("foo", true))
+	assert.False(t, GetEnvBool("foo", false))
+
+	os.Setenv("foo", "true")
+	assert.True(t, GetEnvBool("foo", true))
+
+	os.Setenv("foo", "false")
+	assert.False(t, GetEnvBool("foo", true))
+}
