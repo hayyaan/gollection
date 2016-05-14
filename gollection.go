@@ -4,27 +4,24 @@ import (
 	"log"
 	"os"
 
+	"github.com/MetalMatze/gollection/router"
 	"github.com/codegangsta/cli"
-	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 )
 
 // Gollection holds everything for your application to work
 type Gollection struct {
-	Cli    *cli.App
-	Config Config
-	DB     *gorm.DB
-	Router *gin.Engine
+	Cli          *cli.App
+	Config       Config
+	DB           *gorm.DB
+	RouterEngine router.Engine
 }
 
 // New creates a new gollection with minimum requirements
 func New(c Config) *Gollection {
-	gin.SetMode(gin.ReleaseMode)
-
 	g := Gollection{
 		Cli:    cli.NewApp(),
 		Config: c,
-		Router: gin.Default(),
 	}
 
 	g.startCli()
@@ -37,9 +34,9 @@ func (g *Gollection) Run() error {
 	return g.Cli.Run(os.Args)
 }
 
-func (g *Gollection) AddRoutes(routes func(*gin.Engine)) {
-	routes(g.Router)
-}
+//func (g *Gollection) AddRoutes(routes func(*gin.Engine)) {
+//	routes(g.Router)
+//}
 
 func (g *Gollection) AddDB(db *gorm.DB, err error) {
 	if err != nil {
@@ -51,4 +48,13 @@ func (g *Gollection) AddDB(db *gorm.DB, err error) {
 	}
 
 	g.DB = db
+}
+
+func (g *Gollection) AddRouter(e router.Engine) {
+	g.RouterEngine = e
+	g.RouterEngine.Debug(g.Config.AppConfig.Debug)
+}
+
+func (g *Gollection) AddRoutes(r func(router.Router)) {
+	r(g.RouterEngine.Router())
 }

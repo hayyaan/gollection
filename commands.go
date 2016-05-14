@@ -30,7 +30,7 @@ func (gollection *Gollection) addServeCommand() {
 		Name:  "serve",
 		Usage: "Run the http server that listens on " + addr,
 		Action: func(c *cli.Context) {
-			gollection.Router.Run(addr) // TODO: Return the error
+			gollection.RouterEngine.Run(addr) // TODO: Return the error
 		},
 	})
 }
