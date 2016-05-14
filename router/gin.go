@@ -37,33 +37,33 @@ func (r GinEngine) Run(addr string) error {
 
 // Router implementation
 
-func (r GinEngine) GET(path string, h func(Request, Response)) {
+func (r GinEngine) GET(path string, h func(Request, Response) error) {
 	r.gin.GET(path, func(c *gin.Context) {
 		h(GinRequest{c}, GinResponse{c})
 	})
 }
 
-func (r GinEngine) POST(path string, h func(Request, Response)) {
+func (r GinEngine) POST(path string, h func(Request, Response) error) {
 	r.gin.POST(path)
 }
 
-func (r GinEngine) DELETE(path string, h func(Request, Response)) {
+func (r GinEngine) DELETE(path string, h func(Request, Response) error) {
 	r.gin.DELETE(path)
 }
 
-func (r GinEngine) PATCH(path string, h func(Request, Response)) {
+func (r GinEngine) PATCH(path string, h func(Request, Response) error) {
 	r.gin.PATCH(path)
 }
 
-func (r GinEngine) PUT(path string, h func(Request, Response)) {
+func (r GinEngine) PUT(path string, h func(Request, Response) error) {
 	r.gin.PUT(path)
 }
 
-func (r GinEngine) OPTIONS(path string, h func(Request, Response)) {
+func (r GinEngine) OPTIONS(path string, h func(Request, Response) error) {
 	r.gin.OPTIONS(path)
 }
 
-func (r GinEngine) HEAD(path string, h func(Request, Response)) {
+func (r GinEngine) HEAD(path string, h func(Request, Response) error) {
 	r.gin.HEAD(path)
 }
 
@@ -86,30 +86,37 @@ type GinResponse struct {
 	c *gin.Context
 }
 
-func (r GinResponse) AbortWithStatus(code int) {
+func (r GinResponse) AbortWithStatus(code int) error {
 	r.c.AbortWithStatus(code)
+	return nil
 }
 
-func (r GinResponse) JSON(code int, obj interface{}) {
+func (r GinResponse) JSON(code int, obj interface{}) error {
 	r.c.JSON(code, obj)
+	return nil
 }
 
-func (r GinResponse) XML(code int, obj interface{}) {
+func (r GinResponse) XML(code int, obj interface{}) error {
 	r.c.XML(code, obj)
+	return nil
 }
 
-func (r GinResponse) YAML(code int, obj interface{}) {
+func (r GinResponse) YAML(code int, obj interface{}) error {
 	r.c.YAML(code, obj)
+	return nil
 }
 
-func (r GinResponse) String(code int, s string, v ...interface{}) {
+func (r GinResponse) String(code int, s string, v ...interface{}) error {
 	r.c.String(code, s, v)
+	return nil
 }
 
-func (r GinResponse) Redirect(code int, location string) {
+func (r GinResponse) Redirect(code int, location string) error {
 	r.c.Redirect(code, location)
+	return nil
 }
 
-func (r GinResponse) File(path string) {
+func (r GinResponse) File(path string) error {
 	r.c.File(path)
+	return nil
 }

@@ -9,19 +9,19 @@ type (
 	}
 
 	Router interface {
-		GET(string, func(Request, Response))
-		POST(string, func(Request, Response))
-		DELETE(string, func(Request, Response))
-		PATCH(string, func(Request, Response))
-		PUT(string, func(Request, Response))
-		OPTIONS(string, func(Request, Response))
-		HEAD(string, func(Request, Response))
+		GET(string, func(Request, Response) error)
+		POST(string, func(Request, Response) error)
+		DELETE(string, func(Request, Response) error)
+		PATCH(string, func(Request, Response) error)
+		PUT(string, func(Request, Response) error)
+		OPTIONS(string, func(Request, Response) error)
+		HEAD(string, func(Request, Response) error)
 	}
 
 	Route interface {
 		Method() string
 		Path() string
-		Handler() func(Request, Response)
+		Handler() func(Request, Response) error
 	}
 
 	Request interface {
@@ -30,12 +30,12 @@ type (
 	}
 
 	Response interface {
-		AbortWithStatus(int)
-		JSON(int, interface{})
-		XML(int, interface{})
-		YAML(int, interface{})
-		String(int, string, ...interface{})
-		Redirect(int, string)
-		File(string)
+		AbortWithStatus(int) error
+		JSON(int, interface{}) error
+		XML(int, interface{}) error
+		YAML(int, interface{}) error
+		String(int, string, ...interface{}) error
+		Redirect(int, string) error
+		File(string) error
 	}
 )
