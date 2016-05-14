@@ -34,10 +34,6 @@ func (g *Gollection) Run() error {
 	return g.Cli.Run(os.Args)
 }
 
-//func (g *Gollection) AddRoutes(routes func(*gin.Engine)) {
-//	routes(g.Router)
-//}
-
 func (g *Gollection) AddDB(db *gorm.DB, err error) {
 	if err != nil {
 		log.Fatal(err)
