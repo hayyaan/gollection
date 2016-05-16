@@ -4,6 +4,7 @@ type (
 	Config struct {
 		AppConfig
 		DBConfig
+		RedisConfig
 	}
 	AppConfig struct {
 		Name  string
@@ -19,5 +20,12 @@ type (
 		Database string
 		Username string
 		Password string
+		File     string
+	}
+	RedisConfig struct {
+		Host     string
+		Password string
+		Port     int
+		Database int
 	}
 )

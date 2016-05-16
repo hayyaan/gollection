@@ -7,6 +7,7 @@ import (
 	"github.com/MetalMatze/gollection/router"
 	"github.com/codegangsta/cli"
 	"github.com/jinzhu/gorm"
+	"gopkg.in/redis.v3"
 )
 
 // Gollection holds everything for your application to work
@@ -14,6 +15,7 @@ type Gollection struct {
 	Cli          *cli.App
 	Config       Config
 	DB           *gorm.DB
+	Redis        *redis.Client
 	RouterEngine router.Engine
 }
 
@@ -44,6 +46,19 @@ func (g *Gollection) AddDB(db *gorm.DB, err error) {
 	}
 
 	g.DB = db
+}
+
+func (g *Gollection) AddRedis(r *redis.Client, err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = r.Ping().Err()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	g.Redis = r
 }
 
 func (g *Gollection) AddRouter(e router.Engine) {
