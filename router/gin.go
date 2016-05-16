@@ -44,27 +44,39 @@ func (r GinEngine) GET(path string, h func(Request, Response) error) {
 }
 
 func (r GinEngine) POST(path string, h func(Request, Response) error) {
-	r.gin.POST(path)
+	r.gin.POST(path, func(c *gin.Context) {
+		h(GinRequest{c}, GinResponse{c})
+	})
 }
 
 func (r GinEngine) DELETE(path string, h func(Request, Response) error) {
-	r.gin.DELETE(path)
+	r.gin.DELETE(path, func(c *gin.Context) {
+		h(GinRequest{c}, GinResponse{c})
+	})
 }
 
 func (r GinEngine) PATCH(path string, h func(Request, Response) error) {
-	r.gin.PATCH(path)
+	r.gin.PATCH(path, func(c *gin.Context) {
+		h(GinRequest{c}, GinResponse{c})
+	})
 }
 
 func (r GinEngine) PUT(path string, h func(Request, Response) error) {
-	r.gin.PUT(path)
+	r.gin.PUT(path, func(c *gin.Context) {
+		h(GinRequest{c}, GinResponse{c})
+	})
 }
 
 func (r GinEngine) OPTIONS(path string, h func(Request, Response) error) {
-	r.gin.OPTIONS(path)
+	r.gin.OPTIONS(path, func(c *gin.Context) {
+		h(GinRequest{c}, GinResponse{c})
+	})
 }
 
 func (r GinEngine) HEAD(path string, h func(Request, Response) error) {
-	r.gin.HEAD(path)
+	r.gin.HEAD(path, func(c *gin.Context) {
+		h(GinRequest{c}, GinResponse{c})
+	})
 }
 
 // Request implementation
