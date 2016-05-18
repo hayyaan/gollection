@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/MetalMatze/gollection/cache"
 	"github.com/MetalMatze/gollection/router"
 	"github.com/codegangsta/cli"
 	"github.com/jinzhu/gorm"
@@ -12,6 +13,7 @@ import (
 
 // Gollection holds everything for your application to work
 type Gollection struct {
+	Cache        cache.Cache
 	Cli          *cli.App
 	Config       Config
 	DB           *gorm.DB
@@ -59,6 +61,10 @@ func (g *Gollection) AddRedis(r *redis.Client, err error) {
 	}
 
 	g.Redis = r
+}
+
+func (g *Gollection) AddCache(c cache.Cache) {
+	g.Cache = c
 }
 
 func (g *Gollection) AddRouter(e router.Engine) {
