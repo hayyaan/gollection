@@ -1,5 +1,7 @@
 package router
 
+import "net/http"
+
 type (
 	Engine interface {
 		Use()
@@ -16,6 +18,10 @@ type (
 		PUT(string, func(Request, Response) error)
 		OPTIONS(string, func(Request, Response) error)
 		HEAD(string, func(Request, Response) error)
+
+		// net/http
+		HandleFunc(pattern string, handler func(http.ResponseWriter, *http.Request))
+		Handle(pattern string, handler http.Handler)
 	}
 
 	Route interface {

@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 type GinEngine struct {
@@ -77,6 +78,14 @@ func (r GinEngine) HEAD(path string, h func(Request, Response) error) {
 	r.gin.HEAD(path, func(c *gin.Context) {
 		h(GinRequest{c}, GinResponse{c})
 	})
+}
+
+func (r GinEngine) Handle(pattern string, handler http.Handler) {
+	panic("gin Handle not yet implemented") // TODO
+}
+
+func (r GinEngine) HandleFunc(pattern string, handler func(http.ResponseWriter, *http.Request)) {
+	panic("gin HandleFunc not yet implemented") // TODO
 }
 
 // Request implementation
