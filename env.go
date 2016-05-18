@@ -78,7 +78,7 @@ func GetEnvBool(key string, fallback bool) bool {
 	if s != "" {
 		b, err := strconv.ParseBool(s)
 		if err != nil {
-			log.Printf("Couldn't parse env %s, falling back to %b", key, fallback)
+			log.Printf("Couldn't parse env %s, falling back to %t", key, fallback)
 			return fallback
 		}
 

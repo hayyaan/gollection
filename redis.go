@@ -13,7 +13,7 @@ func NewRedis(c Config) (*redis.Client, error) {
 	}
 
 	if c.RedisConfig.Password != "" {
-		log.Println("%v", c.RedisConfig)
+		log.Printf("%v", c.RedisConfig)
 		opt.Password = c.RedisConfig.Password
 	}
 
