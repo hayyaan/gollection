@@ -1,10 +1,10 @@
 package gollection
 
 import (
-	"log"
 	"os"
 
 	"github.com/MetalMatze/gollection/cache"
+	"github.com/MetalMatze/gollection/log"
 	"github.com/MetalMatze/gollection/router"
 	"github.com/codegangsta/cli"
 	"github.com/jinzhu/gorm"
@@ -17,6 +17,7 @@ type Gollection struct {
 	Cli          *cli.App
 	Config       Config
 	DB           *gorm.DB
+	Log          log.Logger
 	Redis        *redis.Client
 	RouterEngine router.Engine
 }
@@ -26,6 +27,7 @@ func New(c Config) *Gollection {
 	g := Gollection{
 		Cli:    cli.NewApp(),
 		Config: c,
+		Log:    log.NewLog15(),
 	}
 
 	g.startCli()
@@ -40,7 +42,7 @@ func (g *Gollection) Run() error {
 
 func (g *Gollection) AddDB(db *gorm.DB, err error) {
 	if err != nil {
-		log.Fatal(err)
+		g.Log.Crit("Can't connect to the DB", "err", err)
 	}
 
 	if g.Config.AppConfig.Debug {
@@ -52,12 +54,12 @@ func (g *Gollection) AddDB(db *gorm.DB, err error) {
 
 func (g *Gollection) AddRedis(r *redis.Client, err error) {
 	if err != nil {
-		log.Fatal(err)
+		g.Log.Crit("Can't connect to Redis", err)
 	}
 
 	err = r.Ping().Err()
 	if err != nil {
-		log.Fatal(err)
+		g.Log.Crit("Can't connect to Redis", err)
 	}
 
 	g.Redis = r
