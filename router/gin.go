@@ -20,7 +20,6 @@ func (r GinEngine) Debug(d bool) {
 	} else {
 		gin.SetMode(gin.ReleaseMode)
 	}
-
 }
 
 // Engine implementation
@@ -128,7 +127,8 @@ func (r GinResponse) YAML(code int, obj interface{}) error {
 }
 
 func (r GinResponse) String(code int, s string, v ...interface{}) error {
-	r.c.String(code, s, v)
+	r.c.String(code, s, v...)
+
 	return nil
 }
 
