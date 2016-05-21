@@ -3,6 +3,8 @@ package gollection
 import (
 	"fmt"
 	"log"
+	"net/http"
+	_ "net/http/pprof"
 
 	"github.com/codegangsta/cli"
 	"github.com/rubenv/sql-migrate"
@@ -24,13 +26,19 @@ func (gollection *Gollection) AddCommands(commands ...cli.Command) {
 	}
 }
 
-func (gollection *Gollection) addServeCommand() {
-	addr := fmt.Sprintf("%s:%d", gollection.Config.AppConfig.Host, gollection.Config.AppConfig.Port)
-	gollection.Cli.Commands = append(gollection.Cli.Commands, cli.Command{
+func (g *Gollection) addServeCommand() {
+	addr := fmt.Sprintf("%s:%d", g.Config.AppConfig.Host, g.Config.AppConfig.Port)
+	g.Cli.Commands = append(g.Cli.Commands, cli.Command{
 		Name:  "serve",
 		Usage: "Run the http server that listens on " + addr,
 		Action: func(c *cli.Context) {
-			gollection.RouterEngine.Run(addr) // TODO: Return the error
+			if g.Config.Debug {
+				go func() {
+					http.ListenAndServe("localhost:6060", nil)
+				}()
+			}
+
+			g.RouterEngine.Run(addr) // TODO: Return the error
 		},
 	})
 }
