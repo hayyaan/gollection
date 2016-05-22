@@ -4,7 +4,7 @@
 
 @charset "UTF-8";
 @import url("font-awesome.min.css");
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600");
+@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,300,300italic,400italic,600");
 
 /*
 	Telephasic by HTML5 UP
@@ -146,6 +146,25 @@ p, ul, ol, dl, table {
 
 br.clear {
   clear: both;
+}
+
+code {
+  padding: 0.2em;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 14px;
+  background-color: lighten(#52575c, 60);
+
+}
+
+pre {
+  @extend code;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  padding: 16px;
+  overflow-x: auto;
+  code {
+    background: none;
+  }
 }
 
 .features {
