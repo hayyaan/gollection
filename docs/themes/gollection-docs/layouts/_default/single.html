@@ -1,39 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ .Title }} - gollection</title>
-    {{ .Hugo.Generator }}
-    <meta name="description" content="">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
-</head>
-<body>
+{{ partial "header.html" . }}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <h2>gollection</h2>
+<div class="wrapper">
+    <div class="container" id="main">
+        <div class="row 150%">
+            <div class="4u 12u(narrower)">
+
+                <!-- Sidebar -->
+                <section id="sidebar">
+                    <section>
+                        <header>
+                            <h3>Database</h3>
+                        </header>
+                        <a href="/docs/migrations">Migrations</a>
+                    </section>
+                </section>
+
             </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-md-3">
-                <h4>HTTP</h4>
-                Routing<br>
-                Middleware<br>
-                Controllers<br>
-                Requests<br>
-                Responses<br>
-                Templates<br>
-            </div>
-            <div class="col-md-9">
-                {{ .Content }}
+            <div class="8u 12u(narrower) important(narrower)">
+
+                <!-- Content -->
+                <article id="content">
+                    <header>
+                        <h2>{{ .Title }}</h2>
+                    </header>
+                    {{ .Content }}
+                </article>
+
             </div>
         </div>
     </div>
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+
+{{ partial "footer.html" . }}
