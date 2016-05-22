@@ -9,3 +9,15 @@ build:
 cache:
   mount:
     - vendor
+
+deploy:
+  rsync:
+    when:
+      branch: master
+    user: metalmatze
+    host: matthiasloibl.com
+    port: 1234
+    source: docs/public/*
+    target: web/matthiasloibl.com/gollection.matthiasloibl.com
+    delete: true
+    recursive: true
