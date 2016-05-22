@@ -1,0 +1,5 @@
+baseurl = "http://gollection.matthiasloibl.com/"
+languageCode = "en-us"
+title = "gollection"
+
+theme = "gollection-docs"
