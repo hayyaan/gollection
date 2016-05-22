@@ -2,7 +2,6 @@ package gollection
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	_ "net/http/pprof"
 
@@ -55,9 +54,9 @@ func (g *Gollection) addDBCommand() {
 			Action: func(c *cli.Context) {
 				applied, err := migrate.Exec(g.DB.DB(), g.Config.DBConfig.Dialect, migrations, migrate.Up)
 				if err != nil {
-					log.Fatal(err)
+					g.Log.Warn("Can't run migrations", "err", err)
 				}
-				log.Printf("Applied to %d migrations!\n", applied)
+				g.Log.Info(fmt.Sprintf("Applied to %d migrations!", applied))
 			},
 		}, {
 			Name:  "down",
@@ -65,9 +64,10 @@ func (g *Gollection) addDBCommand() {
 			Action: func(c *cli.Context) {
 				applied, err := migrate.Exec(g.DB.DB(), g.Config.DBConfig.Dialect, migrations, migrate.Down)
 				if err != nil {
-					log.Fatal(err)
+					g.Log.Warn("Can't run migrations", "err", err)
 				}
-				log.Printf("Rolled back %d migrations!\n", applied)
+
+				g.Log.Info(fmt.Sprintf("Rolled back %d migrations!\n", applied))
 			},
 		}},
 	})

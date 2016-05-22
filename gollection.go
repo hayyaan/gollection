@@ -47,6 +47,7 @@ func (g *Gollection) AddDB(db *gorm.DB, err error) {
 
 	if g.Config.AppConfig.Debug {
 		db.LogMode(true)
+		db.SetLogger(log.NewGormLogger(g.Log))
 	}
 
 	g.DB = db
