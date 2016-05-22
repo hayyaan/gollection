@@ -37,45 +37,45 @@ func (r GinEngine) Run(addr string) error {
 
 // Router implementation
 
-func (r GinEngine) GET(path string, h func(Request, Response) error) {
+func (r GinEngine) GET(path string, h func(Response, Request) error) {
 	r.gin.GET(path, func(c *gin.Context) {
-		h(GinRequest{c}, GinResponse{c})
+		h(GinResponse{c}, GinRequest{c})
 	})
 }
 
-func (r GinEngine) POST(path string, h func(Request, Response) error) {
+func (r GinEngine) POST(path string, h func(Response, Request) error) {
 	r.gin.POST(path, func(c *gin.Context) {
-		h(GinRequest{c}, GinResponse{c})
+		h(GinResponse{c}, GinRequest{c})
 	})
 }
 
-func (r GinEngine) DELETE(path string, h func(Request, Response) error) {
+func (r GinEngine) DELETE(path string, h func(Response, Request) error) {
 	r.gin.DELETE(path, func(c *gin.Context) {
-		h(GinRequest{c}, GinResponse{c})
+		h(GinResponse{c}, GinRequest{c})
 	})
 }
 
-func (r GinEngine) PATCH(path string, h func(Request, Response) error) {
+func (r GinEngine) PATCH(path string, h func(Response, Request) error) {
 	r.gin.PATCH(path, func(c *gin.Context) {
-		h(GinRequest{c}, GinResponse{c})
+		h(GinResponse{c}, GinRequest{c})
 	})
 }
 
-func (r GinEngine) PUT(path string, h func(Request, Response) error) {
+func (r GinEngine) PUT(path string, h func(Response, Request) error) {
 	r.gin.PUT(path, func(c *gin.Context) {
-		h(GinRequest{c}, GinResponse{c})
+		h(GinResponse{c}, GinRequest{c})
 	})
 }
 
-func (r GinEngine) OPTIONS(path string, h func(Request, Response) error) {
+func (r GinEngine) OPTIONS(path string, h func(Response, Request) error) {
 	r.gin.OPTIONS(path, func(c *gin.Context) {
-		h(GinRequest{c}, GinResponse{c})
+		h(GinResponse{c}, GinRequest{c})
 	})
 }
 
-func (r GinEngine) HEAD(path string, h func(Request, Response) error) {
+func (r GinEngine) HEAD(path string, h func(Response, Request) error) {
 	r.gin.HEAD(path, func(c *gin.Context) {
-		h(GinRequest{c}, GinResponse{c})
+		h(GinResponse{c}, GinRequest{c})
 	})
 }
 

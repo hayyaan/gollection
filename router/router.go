@@ -11,13 +11,13 @@ type (
 	}
 
 	Router interface {
-		GET(string, func(Request, Response) error)
-		POST(string, func(Request, Response) error)
-		DELETE(string, func(Request, Response) error)
-		PATCH(string, func(Request, Response) error)
-		PUT(string, func(Request, Response) error)
-		OPTIONS(string, func(Request, Response) error)
-		HEAD(string, func(Request, Response) error)
+		GET(string, func(Response, Request) error)
+		POST(string, func(Response, Request) error)
+		DELETE(string, func(Response, Request) error)
+		PATCH(string, func(Response, Request) error)
+		PUT(string, func(Response, Request) error)
+		OPTIONS(string, func(Response, Request) error)
+		HEAD(string, func(Response, Request) error)
 
 		// net/http
 		HandleFunc(pattern string, handler func(http.ResponseWriter, *http.Request))
@@ -27,7 +27,7 @@ type (
 	Route interface {
 		Method() string
 		Path() string
-		Handler() func(Request, Response) error
+		Handler() func(Response, Request) error
 	}
 
 	Request interface {
