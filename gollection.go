@@ -6,8 +6,8 @@ import (
 	"github.com/MetalMatze/gollection/cache"
 	"github.com/MetalMatze/gollection/log"
 	"github.com/MetalMatze/gollection/router"
-	"github.com/codegangsta/cli"
 	"github.com/jinzhu/gorm"
+	"github.com/urfave/cli"
 	"gopkg.in/redis.v3"
 )
 

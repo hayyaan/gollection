@@ -5,8 +5,8 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 
-	"github.com/codegangsta/cli"
 	"github.com/rubenv/sql-migrate"
+	"github.com/urfave/cli"
 )
 
 func (g *Gollection) startCli() {
@@ -30,14 +30,14 @@ func (g *Gollection) addServeCommand() {
 	g.Cli.Commands = append(g.Cli.Commands, cli.Command{
 		Name:  "serve",
 		Usage: "Run the http server that listens on " + addr,
-		Action: func(c *cli.Context) {
+		Action: func(c *cli.Context) error {
 			if g.Config.Debug {
 				go func() {
 					http.ListenAndServe("localhost:6060", nil)
 				}()
 			}
 
-			g.RouterEngine.Run(addr) // TODO: Return the error
+			return g.RouterEngine.Run(addr) // TODO: Return the error
 		},
 	})
 }
@@ -51,23 +51,27 @@ func (g *Gollection) addDBCommand() {
 		Subcommands: []cli.Command{{
 			Name:  "up",
 			Usage: "Migrate your database",
-			Action: func(c *cli.Context) {
+			Action: func(c *cli.Context) error {
 				applied, err := migrate.Exec(g.DB.DB(), g.Config.DBConfig.Dialect, migrations, migrate.Up)
 				if err != nil {
 					g.Log.Warn("Can't run migrations", "err", err)
 				}
 				g.Log.Info(fmt.Sprintf("Applied to %d migrations!", applied))
+
+				return nil
 			},
 		}, {
 			Name:  "down",
 			Usage: "Rollback all database migrations",
-			Action: func(c *cli.Context) {
+			Action: func(c *cli.Context) error {
 				applied, err := migrate.Exec(g.DB.DB(), g.Config.DBConfig.Dialect, migrations, migrate.Down)
 				if err != nil {
 					g.Log.Warn("Can't run migrations", "err", err)
 				}
 
 				g.Log.Info(fmt.Sprintf("Rolled back %d migrations!\n", applied))
+
+				return nil
 			},
 		}},
 	})
