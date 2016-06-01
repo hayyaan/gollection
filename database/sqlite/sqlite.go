@@ -1,4 +1,4 @@
-package database
+package sqlite
 
 import (
 	"github.com/MetalMatze/gollection"
@@ -6,6 +6,6 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
-func SQLite(c gollection.Config) (*gorm.DB, error) {
+func New(c gollection.Config) (*gorm.DB, error) {
 	return gorm.Open("sqlite3", c.DBConfig.Database)
 }

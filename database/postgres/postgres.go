@@ -1,4 +1,4 @@
-package database
+package postgres
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
-func Postgres(c gollection.Config) (*gorm.DB, error) {
+func New(c gollection.Config) (*gorm.DB, error) {
 	url := fmt.Sprintf("postgres://%s:%s@%s:%d/%s?sslmode=disable",
 		c.DBConfig.Username,
 		c.DBConfig.Password,
