@@ -2,8 +2,9 @@ package gollection
 
 import (
 	"fmt"
-	"gopkg.in/redis.v3"
 	"log"
+
+	"gopkg.in/redis.v3"
 )
 
 func NewRedis(c Config) (*redis.Client, error) {

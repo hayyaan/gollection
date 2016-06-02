@@ -1,7 +1,7 @@
 package sqlite
 
 import (
-	"github.com/MetalMatze/gollection"
+	"github.com/gollection/gollection"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )

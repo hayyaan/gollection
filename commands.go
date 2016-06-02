@@ -12,7 +12,6 @@ import (
 func (g *Gollection) startCli() {
 	g.Cli.Name = g.Config.AppConfig.Name
 	g.Cli.Usage = g.Config.AppConfig.Usage
-	g.Cli.EnableBashCompletion = true
 
 	g.addServeCommand()
 	g.addDBCommand()
@@ -37,7 +36,7 @@ func (g *Gollection) addServeCommand() {
 				}()
 			}
 
-			return g.RouterEngine.Run(addr) // TODO: Return the error
+			return g.RouterEngine.Run(addr)
 		},
 	})
 }

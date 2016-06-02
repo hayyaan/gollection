@@ -3,9 +3,9 @@ package gollection
 import (
 	"os"
 
-	"github.com/MetalMatze/gollection/cache"
-	"github.com/MetalMatze/gollection/log"
-	"github.com/MetalMatze/gollection/router"
+	"github.com/gollection/gollection/cache"
+	"github.com/gollection/gollection/log"
+	"github.com/gollection/gollection/router"
 	"github.com/jinzhu/gorm"
 	"github.com/urfave/cli"
 	"gopkg.in/redis.v3"

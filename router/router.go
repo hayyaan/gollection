@@ -37,10 +37,11 @@ type (
 
 	Response interface {
 		AbortWithStatus(int) error
+		String(int, string, ...interface{}) error
+		HTML(int, string, interface{}) error
 		JSON(int, interface{}) error
 		XML(int, interface{}) error
 		YAML(int, interface{}) error
-		String(int, string, ...interface{}) error
 		Redirect(int, string) error
 		File(string) error
 	}
