@@ -12,7 +12,6 @@ import (
 // which are then set as ENV variables
 func LoadEnv(filename string) error {
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
-		log.Printf("%s file not found", filename)
 		return nil
 	}
 
