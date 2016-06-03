@@ -13,7 +13,6 @@ func (g *Gollection) startCli() {
 	g.Cli.Name = g.Config.AppConfig.Name
 	g.Cli.Usage = g.Config.AppConfig.Usage
 
-	g.addServeCommand()
 	g.addDBCommand()
 }
 

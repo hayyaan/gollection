@@ -73,6 +73,8 @@ func (g *Gollection) AddCache(c cache.Cache) {
 func (g *Gollection) AddRouter(e router.Engine) {
 	g.RouterEngine = e
 	g.RouterEngine.Debug(g.Config.AppConfig.Debug)
+
+	g.addServeCommand()
 }
 
 func (g *Gollection) AddRoutes(r func(router.Router)) {
