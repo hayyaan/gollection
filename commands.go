@@ -50,27 +50,49 @@ func (g *Gollection) addDBCommand() {
 			Name:  "up",
 			Usage: "Migrate your database",
 			Action: func(c *cli.Context) error {
-				applied, err := migrate.Exec(g.DB.DB(), g.Config.DBConfig.Dialect, migrations, migrate.Up)
-				if err != nil {
-					g.Log.Warn("Can't run migrations", "err", err)
-				}
-				g.Log.Info(fmt.Sprintf("Applied to %d migrations!", applied))
-
-				return nil
+				return migrateUp(g, migrations)
 			},
 		}, {
 			Name:  "down",
 			Usage: "Rollback all database migrations",
 			Action: func(c *cli.Context) error {
-				applied, err := migrate.Exec(g.DB.DB(), g.Config.DBConfig.Dialect, migrations, migrate.Down)
-				if err != nil {
-					g.Log.Warn("Can't run migrations", "err", err)
+				return migrateDown(g, migrations)
+			},
+		}, {
+			Name:  "reset",
+			Usage: "Reset the database by running down & up migrations",
+			Action: func(c *cli.Context) error {
+				if err := migrateDown(g, migrations); err != nil {
+					return err
 				}
 
-				g.Log.Info(fmt.Sprintf("Rolled back %d migrations!\n", applied))
+				if err := migrateUp(g, migrations); err != nil {
+					return err
+				}
 
 				return nil
 			},
 		}},
 	})
+}
+
+func migrateUp(g *Gollection, m *migrate.FileMigrationSource) error {
+	applied, err := migrate.Exec(g.DB.DB(), g.Config.DBConfig.Dialect, m, migrate.Up)
+	if err != nil {
+		g.Log.Warn("Can't run migrations", "err", err)
+	}
+	g.Log.Info(fmt.Sprintf("Applied to %d migrations!", applied))
+
+	return nil
+}
+
+func migrateDown(g *Gollection, m *migrate.FileMigrationSource) error {
+	applied, err := migrate.Exec(g.DB.DB(), g.Config.DBConfig.Dialect, m, migrate.Down)
+	if err != nil {
+		g.Log.Warn("Can't run migrations", "err", err)
+	}
+
+	g.Log.Info(fmt.Sprintf("Rolled back %d migrations!", applied))
+
+	return nil
 }
