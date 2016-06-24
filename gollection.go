@@ -22,7 +22,7 @@ func New(c Config) *Gollection {
 }
 
 // Register takes different kinds of providers and registers them correctly with gollection
-func (g *Gollection) Register(s Provider) {
+func (g *Gollection) Register(s interface{}) {
 	cliService, ok := s.(CLIProvider)
 	if ok {
 		g.cli.Commands = append(g.cli.Commands, cliService.Cli())
