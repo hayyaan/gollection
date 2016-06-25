@@ -26,12 +26,12 @@ func (ms MessageService) Cli() cli.Command {
 func TestCli(t *testing.T) {
 	g := New(Config{Name: "app", Usage: "Run an app"})
 	assert.NotNil(t, g)
-	assert.NotNil(t, g.cli)
-	assert.Equal(t, "app", g.cli.Name)
-	assert.Equal(t, "Run an app", g.cli.Usage)
-	assert.Len(t, g.cli.Commands, 0)
+	assert.NotNil(t, g.Cli)
+	assert.Equal(t, "app", g.Cli.Name)
+	assert.Equal(t, "Run an app", g.Cli.Usage)
+	assert.Len(t, g.Cli.Commands, 0)
 
 	g.Register(MessageService{Msg: "foobar"})
-	assert.Len(t, g.cli.Commands, 1)
-	assert.ObjectsAreEqual(command, g.cli.Commands[0])
+	assert.Len(t, g.Cli.Commands, 1)
+	assert.ObjectsAreEqual(command, g.Cli.Commands[0])
 }

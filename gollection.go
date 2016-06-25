@@ -1,37 +1,38 @@
 package gollection
 
 import (
-	"github.com/urfave/cli"
 	"os"
+
+	"github.com/urfave/cli"
 )
 
 // Gollection is the base object for everything
 type Gollection struct {
-	cli    *cli.App
-	config Config
+	Cli    *cli.App
+	Config Config
 }
 
 // New creates a new Gollection object from the given config and instantiates the cli app
 func New(c Config) *Gollection {
 	g := &Gollection{
-		cli:    cli.NewApp(),
-		config: c,
+		Cli:    cli.NewApp(),
+		Config: c,
 	}
 
-	g.cli.Name = g.config.Name
-	g.cli.Usage = g.config.Usage
+	g.Cli.Name = g.Config.Name
+	g.Cli.Usage = g.Config.Usage
 
 	return g
 }
 
 func (g *Gollection) Run() error {
-	return g.cli.Run(os.Args)
+	return g.Cli.Run(os.Args)
 }
 
 // Register takes different kinds of providers and registers them correctly with gollection
 func (g *Gollection) Register(s interface{}) {
 	cliService, ok := s.(CLIProvider)
 	if ok {
-		g.cli.Commands = append(g.cli.Commands, cliService.Cli())
+		g.Cli.Commands = append(g.Cli.Commands, cliService.Cli())
 	}
 }
