@@ -1,6 +1,9 @@
 package gollection
 
-import "github.com/urfave/cli"
+import (
+	"github.com/urfave/cli"
+	"os"
+)
 
 // Gollection is the base object for everything
 type Gollection struct {
@@ -19,6 +22,10 @@ func New(c Config) *Gollection {
 	g.cli.Usage = g.config.Usage
 
 	return g
+}
+
+func (g *Gollection) Run() error {
+	return g.cli.Run(os.Args)
 }
 
 // Register takes different kinds of providers and registers them correctly with gollection
