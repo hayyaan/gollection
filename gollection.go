@@ -3,6 +3,7 @@ package gollection
 import (
 	"os"
 
+	"github.com/go-kit/kit/log"
 	"github.com/urfave/cli"
 )
 
@@ -10,6 +11,7 @@ import (
 type Gollection struct {
 	Cli    *cli.App
 	Config Config
+	Logger log.Logger
 }
 
 // New creates a new Gollection object from the given config and instantiates the cli app
