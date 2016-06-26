@@ -12,4 +12,8 @@ lint:
 	go vet $(PACKAGES)
 
 test:
-	@for PKG in $(PACKAGES); do go test -cover -coverprofile $$GOPATH/src/$$PKG/coverage.out $$PKG || exit 1; done;
+	echo "mode: count" > coverage-all.out
+	$(foreach pkg,$(PACKAGES),\
+		go test -coverprofile=coverage.out -covermode=count $(pkg);\
+		tail -n +2 coverage.out >> coverage-all.out;)
+	go tool cover -html=coverage-all.out
