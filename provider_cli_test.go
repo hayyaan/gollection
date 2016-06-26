@@ -1,8 +1,10 @@
 package gollection
 
 import (
+	"bytes"
 	"testing"
 
+	"github.com/go-kit/kit/log"
 	"github.com/stretchr/testify/assert"
 	"github.com/urfave/cli"
 )
@@ -24,7 +26,10 @@ func (ms MessageService) Cli() cli.Command {
 }
 
 func TestCli(t *testing.T) {
-	g := New(Config{Name: "app", Usage: "Run an app"})
+	var buf bytes.Buffer
+	logger := log.NewLogfmtLogger(&buf)
+
+	g := New(logger, Config{Name: "app", Usage: "Run an app"})
 	assert.NotNil(t, g)
 	assert.NotNil(t, g.Cli)
 	assert.Equal(t, "app", g.Cli.Name)

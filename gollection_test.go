@@ -1,8 +1,10 @@
 package gollection
 
 import (
+	"bytes"
 	"testing"
 
+	"github.com/go-kit/kit/log"
 	"github.com/stretchr/testify/assert"
 	"github.com/urfave/cli"
 )
@@ -10,7 +12,10 @@ import (
 var c = Config{Name: "app", Usage: "my app"}
 
 func TestNew(t *testing.T) {
-	g := New(c)
+	var buf bytes.Buffer
+	logger := log.NewLogfmtLogger(&buf)
+
+	g := New(logger, c)
 
 	assert.Equal(t, c, g.Config)
 	assert.NotNil(t, g.Cli)

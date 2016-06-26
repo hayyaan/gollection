@@ -15,10 +15,11 @@ type Gollection struct {
 }
 
 // New creates a new Gollection object from the given config and instantiates the cli app
-func New(c Config) *Gollection {
+func New(logger log.Logger, c Config) *Gollection {
 	g := &Gollection{
 		Cli:    cli.NewApp(),
 		Config: c,
+		Logger: logger,
 	}
 
 	g.Cli.Name = g.Config.Name
