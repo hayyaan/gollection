@@ -26,6 +26,8 @@ func New(logger log.Logger, c router.Config) *ginWrapper {
 	}
 
 	g.Engine.Use(gin.Recovery())
+
+	logger = log.NewContext(logger).With("service", "gin")
 	g.Engine.Use(ginLogging(logger))
 
 	return g

@@ -10,6 +10,8 @@ import (
 // New returns a new sqlite gorm db connection
 func New(logger log.Logger, c gogorm.Config) (*gorm.DB, error) {
 	g, err := gorm.Open("sqlite3", c.Database)
+
+	logger = log.NewContext(logger).With("service", "gorm")
 	g.SetLogger(gogorm.NewLogger(logger))
 
 	return g, err
