@@ -6,22 +6,18 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-kit/kit/log"
+	"github.com/gollection/gollection/router"
 	"github.com/urfave/cli"
 )
 
-type GinConfig struct {
-	Host string
-	Port int
-}
-
 // Gin is a gin-gonic wrapper that implements gollection's interfaces
 type Gin struct {
-	config GinConfig
+	config router.Config
 	Engine *gin.Engine
 }
 
 // New creates a new Gin wrapper
-func New(logger log.Logger, c GinConfig) *Gin {
+func New(logger log.Logger, c router.Config) *Gin {
 	gin.SetMode(gin.ReleaseMode)
 
 	g := &Gin{
