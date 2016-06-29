@@ -11,16 +11,16 @@ import (
 )
 
 // Gin is a gin-gonic wrapper that implements gollection's interfaces
-type Gin struct {
+type ginWrapper struct {
 	config router.Config
 	Engine *gin.Engine
 }
 
 // New creates a new Gin wrapper
-func New(logger log.Logger, c router.Config) *Gin {
+func New(logger log.Logger, c router.Config) *ginWrapper {
 	gin.SetMode(gin.ReleaseMode)
 
-	g := &Gin{
+	g := &ginWrapper{
 		config: c,
 		Engine: gin.New(),
 	}
@@ -32,12 +32,13 @@ func New(logger log.Logger, c router.Config) *Gin {
 }
 
 // Cli implements the CliProvider interface and adds gin to the set of cli commands
-func (g Gin) Cli() cli.Command {
+func (g ginWrapper) Cli() cli.Command {
+	addr := fmt.Sprintf("%s:%d", g.config.Host, g.config.Port)
 	return cli.Command{
 		Name:  "serve",
-		Usage: "Run the http server that listens on ", //+ addr,
+		Usage: "Run the http server that listens on " + addr,
 		Action: func(c *cli.Context) error {
-			g.Engine.Run(fmt.Sprintf("%s:%d", g.config.Host, g.config.Port))
+			g.Engine.Run(addr)
 			return nil
 		},
 	}

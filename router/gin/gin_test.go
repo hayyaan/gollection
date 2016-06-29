@@ -16,9 +16,9 @@ func TestGin_New(t *testing.T) {
 }
 
 func TestGin_Cli(t *testing.T) {
-	r := New(log.NewNopLogger(), router.Config{})
+	r := New(log.NewNopLogger(), router.Config{Host: "foobar", Port: 666})
 	cli := r.Cli()
 	assert.Equal(t, "serve", cli.Name)
-	assert.Equal(t, "Run the http server that listens on ", cli.Usage)
+	assert.Equal(t, "Run the http server that listens on foobar:666", cli.Usage)
 	assert.NotNil(t, cli.Action) // TODO: Test more than if Action != nil
 }
