@@ -1,8 +1,6 @@
 package mysql
 
 import (
-	"fmt"
-
 	"github.com/go-kit/kit/log"
 	"github.com/gollection/gollection/database"
 	gogorm "github.com/gollection/gollection/database/gorm"
@@ -12,13 +10,7 @@ import (
 
 // New returns a new mysql gorm db connection
 func New(logger log.Logger, c database.Config) (*gorm.DB, error) {
-	g, err := gorm.Open("mysql", fmt.Sprintf("%s:%s@%s:%d/%s?charset=utf8&parseTime=True&loc=Local",
-		c.Username,
-		c.Password,
-		c.Host,
-		c.Port,
-		c.Database,
-	))
+	g, err := gorm.Open("mysql", c.DSN()+"?charset=utf8&parseTime=True&loc=Local")
 
 	g.SetLogger(gogorm.NewLogger(logger))
 
