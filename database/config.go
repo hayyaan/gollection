@@ -1,6 +1,6 @@
-package gorm
+package database
 
-// Config describes the data for gorm to connect to a database
+// Config describes how to connect to a database
 type Config struct {
 	Username string
 	Password string
