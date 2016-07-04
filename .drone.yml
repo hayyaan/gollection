@@ -7,10 +7,6 @@ build:
     - make
     - make docs
 
-cache:
-  mount:
-    - vendor
-
 deploy:
   rsync:
     when:
