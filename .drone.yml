@@ -3,7 +3,7 @@ build:
 #  environment:
 #    - CGO_ENABLED=0
   commands:
-    - go get ./...
+    - go get -t -v ./...
     - make
     - make docs
 
