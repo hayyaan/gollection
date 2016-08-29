@@ -8,7 +8,7 @@
 One could say gollection is a web framework, yet it understands itself, as the name suggests, as a collection of the best go frameworks to enable rapid development of your application.  
 It was born out of the frustration to always write the same boilerplate code, when using the same frameworks.
 
-**Disclaimer:** This is intented to be opionionated, so it can provide you with the best tools (in our opinion). If you dislike this collection or some parts you don't have to use it. 😉
+**Disclaimer:** This is intended to be opinionated, so it can provide you with the best tools (in our opinion). If you dislike this collection or some parts you don't have to use it. 😉
 
 ### Contributing
 Simply fork the code and send a pull request.
